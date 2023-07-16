@@ -198,26 +198,78 @@ psk=ac937d
 ## setup apache and remove
 
 # Start Apache 2 server on Linux/Unix
+
 sudo apt install apache2
 
 # allow uncomplicated firewall
+
 sudo ufw allow 'Apache'
 
 # start the server
+
 sudo service apache2 start
 
 # /var/www/html/index.html is now live on =>
-http://localhost/ 
+
+http://localhost/
 
 # Stop Apache 2 server on Linux/Unix
+
 sudo service apache2 stop
 
 #remove apache2 packages
 $ sudo apt-get purge apache2 apache2-utils apache2-bin apache2.2-common
 
 # cleanup
+
 $ sudo apt-get autoremove
 
-### auto try wifi login after restart or powerup
+## Allow ethernet port
+
+    `sudo ufw allow 6000:6500/tcp`
+
+# Attention please
+
+## Update this on your samba config file
+
+`sudo nano /etc/samba/smb.conf`
+
+    `browsable = yes`
+
+    `sudo service smbd restart`
+
+## How To Assign Static IP Address on Raspberry Pi
+
+    `ifconfig`
+
+    `hostname -I`
+
+    `sudo nano /etc/dhcpcd.conf`
+
+    `ip route show`
+
+## output
+
+`default via 10.42.0.1 dev eth0 proto dhcp src 10.42.0.165 metric 202
+10.42.0.0/24 dev eth0 proto dhcp scope link src 10.42.0.165 metric 202`
+
+## actual
+
+`# Example static IP configuration:
+#interface eth0
+static ip_address=10.42.0.165/24
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=10.42.0.1
+static domain_name_servers=10.42.0.1 8.8.8.8`
+
+## reboot
+
+- `sudo reboot`
+
+### This way you can update and also you can change your wifi interface as a static Ip address
+
+### Auto try wifi login after restart or powerup
+
+### Lastly if you want to use my script [script.sh](./bash.sh) and please check thoose comment and update that by your self :)
 
 # Thanks Regardless, Hamza Zahidul Islam
