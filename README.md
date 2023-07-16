@@ -42,10 +42,69 @@ Raspberry Pi 4 NAS setup
 
 ## Now thing to do. That is we need to install the main important package that required
 
-- ## some important this tool are required when we mount our external disk 
+- ## Some important this tool are required when we mount our external disk
 
-    `sudo apt install exfat-utils exfat-fuse ntfs-3g`
+  `sudo apt install exfat-utils exfat-fuse ntfs-3g`
 
-## install samba for nas server 
+## Install samba for nas server
 
     `sudo apt install samba samba-common-bin -y`
+
+## Check the monted disk
+
+    `lsblk`
+
+- ## Out-put
+
+      `NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+
+  mmcblk0 179:0 0 119.1G 0 disk
+  ├─mmcblk0p1 179:1 0 256M 0 part /boot
+  └─mmcblk0p2 179:2 0 118.8G 0 part /`
+
+## We mount diskt our specif folde that we want. as a NAS folder
+
+    - And add user and create group and link that group policy with samba
+
+## If you want to unmount that write this command
+
+- ## Please remember you see that is example path
+
+  `sudo unmount -R /media/pi/"Ultra Toch" `
+
+  `sudo mkdir ./nas`
+
+  `ls -l`
+
+  `ls -a`
+
+  `sudo chown -R root:users ./nas`
+
+  `sudo chmod -R ug=rwx,o=rx ./nas`
+
+## Now mount our disk
+
+    `sudo mount /dev/sda1 /nas`
+
+## configure the samba file
+
+`sudo nano /etc/samba/smb.conf`
+
+##
+
+### add read only=no
+
+## this is your server destination
+
+`[shared_folder]
+   comment = TC Nas Server
+   path = /nas
+   read only = no
+   create mask = 0660
+   directory mask = 0771
+   public = no
+   valid user = samba_pi`
+
+## add user
+
+    `sudo useradd -m -G users samba_pi`
