@@ -86,15 +86,15 @@ Raspberry Pi 4 NAS setup
 
     `sudo mount /dev/sda1 /nas`
 
-## configure the samba file
+## Configure the samba file
 
 `sudo nano /etc/samba/smb.conf`
 
 ##
 
-### add read only=no
+### Add read only=no
 
-## this is your server destination
+## This is your server destination
 
 `[shared_folder]
    comment = TC Nas Server
@@ -105,6 +105,31 @@ Raspberry Pi 4 NAS setup
    public = no
    valid user = samba_pi`
 
-## add user
+## Add user
 
     `sudo useradd -m -G users samba_pi`
+
+## Update password of smaba_pi
+
+    `sudo passwd samba_pi`
+
+## Add this user into samba
+
+    `sudo smbpasswd -a samba_pi`
+
+## Restart samba and add firewall rule
+
+    `sudo service smb restart`
+
+# Now we can use this.
+
+    `sudo apt install ifconfig`
+
+- check your ip and try on you nas file system
+
+## in windows win+r type inside "\\192.172.12.22"
+
+## run that and propt   will come and add the samba user and password 
+
+Thanks Regardless,
+Hamza Zahidul Islam
