@@ -147,6 +147,77 @@ Raspberry Pi 4 NAS setup
 
 ### set static ip every time
 
+### How to Connect Raspberry Pi to WiFi Using Terminal
+
+- ## [source](https://linuxhint.com/connect-raspberry-pi-wifi-using-terminal/)
+
+  - `sudo iwlist wlan0 scan`
+
+    - example
+
+    `sudo nano /etc/wpa_supplicant/wpa_supplicant.conf`
+
+    `ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+
+update_config=1
+
+country="US"
+
+network={
+
+ssid="<Wifi-Network-Name>"
+
+scan_ssid=1
+
+psk="<Password>"
+
+key_mgmt=WPA-PSK
+
+}`default this is`ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+ssid="YVYVY-BSU 5780"
+psk=ac937d
+}`
+
+[key_mgmt](https://forums.gentoo.org/viewtopic-p-7086578.html)
+
+    `country=<country code like "US" for USA>`
+
+    `country="US"`
+
+[error](https://forums.raspberrypi.com/viewtopic.php?t=213550)
+
+## check wifi monitor mode and install the driver
+
+    `lsusb`
+
+    `iwconfig`
+
+## setup apache and remove
+
+# Start Apache 2 server on Linux/Unix
+sudo apt install apache2
+
+# allow uncomplicated firewall
+sudo ufw allow 'Apache'
+
+# start the server
+sudo service apache2 start
+
+# /var/www/html/index.html is now live on =>
+http://localhost/ 
+
+# Stop Apache 2 server on Linux/Unix
+sudo service apache2 stop
+
+#remove apache2 packages
+$ sudo apt-get purge apache2 apache2-utils apache2-bin apache2.2-common
+
+# cleanup
+$ sudo apt-get autoremove
+
 ### auto try wifi login after restart or powerup
 
 # Thanks Regardless, Hamza Zahidul Islam
