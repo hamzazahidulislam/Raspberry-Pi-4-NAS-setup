@@ -50,6 +50,8 @@ sudo useradd -m -G users samba_pi
 
 sudo service smbd restart
 
+sudo service nmbd restart
+
 sudo apt install ufw
 
 sudo ufw allow samba

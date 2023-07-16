@@ -20,6 +20,14 @@ Raspberry Pi 4 NAS setup
 
 ![image](./assets/2023-07-16_10h50_10.png)
 
+## Login via ssh
+
+    `ssh pi@raspberrypi.local`
+
+- Example if you find the ip
+
+  `ssh pi@192.168.137.168`
+
 ## Update
 
     `sudo apt-get update`
@@ -119,17 +127,26 @@ Raspberry Pi 4 NAS setup
 
 ## Restart samba and add firewall rule
 
-    `sudo service smb restart`
+    `sudo service smbd restart`
+
+    `sudo service nmbd restart`
 
 # Now we can use this.
 
-    `sudo apt install ifconfig`
+`sudo apt install ufw`
 
-- check your ip and try on you nas file system
+`sudo ufw allow samba`
 
-## in windows win+r type inside "\\192.172.12.22"
+`sudo apt install ifconfig`
 
-## run that and propt   will come and add the samba user and password 
+- # check your ip and try on you nas file system
 
-Thanks Regardless,
-Hamza Zahidul Islam
+## In windows win+r type inside "\\192.172.12.22"
+
+## Run that and propt will come and add the samba user and password
+
+### set static ip every time
+
+### auto try wifi login after restart or powerup
+
+# Thanks Regardless, Hamza Zahidul Islam
